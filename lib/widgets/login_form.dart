@@ -21,7 +21,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     super.initState();
     _emailController = TextEditingController(text: 'demo@inews.com');
     _passwordController = TextEditingController();
-    _authController = Get.find<AuthController>();
+    _authController = Get.find<AuthController>(tag: 'auth');
   }
 
   @override
@@ -136,7 +136,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await Future.delayed(const Duration(milliseconds: 100));
+                    if (!mounted) return;
                     Get.snackbar(
                       'Password Reset',
                       'Please contact support to reset your password',
@@ -320,8 +322,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       _emailController.text = email;
+                      await Future.delayed(const Duration(milliseconds: 100));
+                      if (!mounted) return;
                       Get.snackbar(
                         'Filled',
                         'Email filled, enter password',
@@ -353,6 +357,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     final password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
+      // Ensure overlay is ready before showing snackbar
+      await Future.delayed(const Duration(milliseconds: 100));
+      if (!mounted) return;
+      
       Get.snackbar(
         'Validation Error',
         'Please enter both email and password',
@@ -369,6 +377,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     );
 
     if (success) {
+      // Ensure overlay is ready before showing snackbar
+      await Future.delayed(const Duration(milliseconds: 100));
+      if (!mounted) return;
+      
       Get.snackbar(
         'Login Successful',
         'Welcome ${_authController.userName}!',

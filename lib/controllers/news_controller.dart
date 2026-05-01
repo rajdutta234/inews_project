@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../models/news_model.dart';
-import 'dart:async';
 
 class NewsController extends GetxController {
   var newsList = <NewsModel>[

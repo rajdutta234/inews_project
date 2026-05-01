@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import '../models/news_model.dart';
-import '../widgets/custom_app_bar.dart';
 import '../utils/watermark_util.dart';
 import '../controllers/news_controller.dart';
 

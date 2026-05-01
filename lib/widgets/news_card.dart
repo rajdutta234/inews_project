@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../models/news_model.dart';
 import '../utils/watermark_util.dart';
-import '../routes/app_routes.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsModel news;

@@ -136,16 +136,13 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () async {
-                    await Future.delayed(const Duration(milliseconds: 100));
-                    if (!mounted) return;
-                    Get.snackbar(
-                      'Password Reset',
-                      'Please contact support to reset your password',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.orange[700],
-                      colorText: Colors.white,
-                      duration: const Duration(seconds: 3),
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('Please contact support to reset your password'),
+                        backgroundColor: Colors.orange[700],
+                        duration: const Duration(seconds: 3),
+                      ),
                     );
                   },
                   child: const Text('Forgot password?'),
@@ -322,15 +319,13 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () async {
+                    onPressed: () {
                       _emailController.text = email;
-                      await Future.delayed(const Duration(milliseconds: 100));
-                      if (!mounted) return;
-                      Get.snackbar(
-                        'Filled',
-                        'Email filled, enter password',
-                        snackPosition: SnackPosition.BOTTOM,
-                        duration: const Duration(seconds: 2),
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Email filled, enter password'),
+                          duration: Duration(seconds: 2),
+                        ),
                       );
                     },
                     style: TextButton.styleFrom(
@@ -357,16 +352,11 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     final password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
-      // Ensure overlay is ready before showing snackbar
-      await Future.delayed(const Duration(milliseconds: 100));
-      if (!mounted) return;
-      
-      Get.snackbar(
-        'Validation Error',
-        'Please enter both email and password',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red[700],
-        colorText: Colors.white,
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please enter both email and password'),
+          backgroundColor: Colors.red[700],
+        ),
       );
       return;
     }
@@ -377,19 +367,13 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     );
 
     if (success) {
-      // Ensure overlay is ready before showing snackbar
-      await Future.delayed(const Duration(milliseconds: 100));
-      if (!mounted) return;
-      
-      Get.snackbar(
-        'Login Successful',
-        'Welcome ${_authController.userName}!',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green[700],
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Welcome ${_authController.userName}!'),
+          backgroundColor: Colors.green[700],
+          duration: const Duration(seconds: 2),
+        ),
       );
-      // Navigation will be handled by the auth controller
     }
   }
 }

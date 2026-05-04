@@ -98,6 +98,7 @@ class AuthController extends GetxController {
           await box.write(_isLoggedInKey, true);
 
           errorMessage.value = '';
+          Get.offAllNamed(AppRoutes.home);
           return true;
         } else {
           errorMessage.value = 'Invalid email or password';
